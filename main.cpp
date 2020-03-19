@@ -1,13 +1,16 @@
-#include "include/board.hpp"
+//#include "include/boardDynamicArray.hpp"
+#include "include/boardStaticArray.hpp"
 #include <iostream>
+#include <array>
 
 int main() {
 
 	std::cout << "Create sudoku board.." << std::endl;
-	const size_t sizeBoard = 81;
-	Board<sizeBoard> board;
+	const size_t sizeBoard = 9;
+	Board<sizeBoard,sizeBoard> board;
 	board.creator();
-	std::array<int,sizeBoard> testBoard = board.getBoard();
+	std::array<std::array<int,sizeBoard>, sizeBoard> testBoard = board.getBoard();
+	//int** tstboard= board.getBoard();
 	board.displayBoard();
 
 	return 0;
