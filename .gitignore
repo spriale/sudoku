@@ -1,0 +1,6 @@
+#visual studio tmp
+.vs/*
+out/*
+
+*.swp
+	
