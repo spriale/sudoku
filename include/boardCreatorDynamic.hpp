@@ -1,21 +1,42 @@
 #pragma once
 #include <iostream>
 #include <array>
+#include "board.hpp"
 
 template <size_t N1, size_t N2>
-class Board {
+class BoardCreator {
 private:
 	int** board;
+	size_t rows;
+	size_t columns;
+
+	//Board boardT;
 public:
-	Board():board{} {}; 
+	BoardCreator() : board{}, rows{ N1 }, columns{ N2 }{};
+	//BoardCreator(int **board) : board{board}, rows{ N1 }, columns{ N2 }{};
+	/*BoardCreator(int** board) : board{ board }, Board{ N1,N2 }{
+		this->board = new int* [rows];
+		for (int row = 0;row < rows;row++) {
+			this->board[row] = new int[columns];
+			for (int col = 0;col < columns;col++) {
+				this->board[row][col] = 0;
+			}
+		}
+	};*/
+	
+	
 	void creator();
 	bool isValid(int& value, int& row, int& col);
-	void displayBoard();
+
 	int** getBoard();
+	size_t getRows();
+	size_t getColumns();
 };
 
+
+
 template <size_t N1, size_t N2>
-void Board<N1,N2>::creator() {
+void BoardCreator<N1,N2>::creator() {
 
 	this->board= new int*[N1];
 	//create 2 pointer with 1 array each
@@ -35,7 +56,7 @@ void Board<N1,N2>::creator() {
 }
 
 template <size_t N1, size_t N2>
-bool Board<N1,N2>::isValid(int& value, int& row, int& col){
+bool BoardCreator<N1,N2>::isValid(int& value, int& row, int& col){
 	//check row
 
 	if ((col == 0) && (row ==0)) {
@@ -65,9 +86,9 @@ bool Board<N1,N2>::isValid(int& value, int& row, int& col){
 	}
 	return true;
 }
-
+/*
 template <size_t N1, size_t N2>
-void Board<N1,N2>::displayBoard() {
+void BoardCreator<N1,N2>::displayBoard() {
 
 	std::cout << "=============================" << std::endl;
 	for (int row = 0;row < N1; ++row) {
@@ -86,9 +107,19 @@ void Board<N1,N2>::displayBoard() {
 	}
 	std::cout << "=============================" << std::endl;
 }
-
+*/
 
 template <size_t N1, size_t N2>
-int** Board<N1,N2>::getBoard() {	
+int** BoardCreator<N1,N2>::getBoard() {	
 	return this->board;
+}
+
+template <size_t N1, size_t N2>
+size_t BoardCreator<N1, N2>::getRows() {
+	return this->rows;
+}
+
+template <size_t N1, size_t N2>
+size_t BoardCreator<N1, N2>::getColumns() {
+	return this->columns;
 }

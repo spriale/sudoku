@@ -2,6 +2,6 @@
 
 include_directories(${PROJECT_SOURCE_DIR}/include/)
 add_library(board 
-				board.cpp
-				)
+				"boardSolver.cpp"
+				 "board.cpp")
 #target_link_libraries(sudoku LibProject)
