@@ -4,26 +4,33 @@
 #include "board.hpp"
 
 template <size_t N1, size_t N2>
-class BoardCreator {
+class BoardCreator:public Board{
 private:
-	int** board;
 	size_t rows;
 	size_t columns;
-
-	//Board boardT;
+	int** board;
 public:
-	BoardCreator() : board{}, rows{ N1 }, columns{ N2 }{};
-	//BoardCreator(int **board) : board{board}, rows{ N1 }, columns{ N2 }{};
-	/*BoardCreator(int** board) : board{ board }, Board{ N1,N2 }{
-		this->board = new int* [rows];
-		for (int row = 0;row < rows;row++) {
-			this->board[row] = new int[columns];
-			for (int col = 0;col < columns;col++) {
-				this->board[row][col] = 0;
+	BoardCreator() : rows{ N1 }, columns{ N2 }, board{}{};
+
+	void displayBoard() override {
+
+		std::cout << "=============================" << std::endl;
+		for (int row = 0;row < N1; ++row) {
+			if ((row % 3 == 0) && (row != 0)) {
+				std::cout << "=============================" << std::endl;
 			}
+			for (int col = 0; col < N2; ++col) {
+
+				if ((col % 3 == 0) && (col != 0)) {
+					std::cout << "|";
+				}
+
+				std::cout << " " << board[row][col] << " ";
+			}
+			std::cout << "\n";
 		}
-	};*/
-	
+		std::cout << "=============================" << std::endl;
+	}
 	
 	void creator();
 	bool isValid(int& value, int& row, int& col);
@@ -37,8 +44,7 @@ public:
 
 template <size_t N1, size_t N2>
 void BoardCreator<N1,N2>::creator() {
-
-	this->board= new int*[N1];
+	this->board = new int* [N1];
 	//create 2 pointer with 1 array each
 	for (int row = 0;row < N1;row++) {
 		this->board[row] = new int[N2];
@@ -63,13 +69,13 @@ bool BoardCreator<N1,N2>::isValid(int& value, int& row, int& col){
 		return true;
 	}
 	for (int i = col;i > 0;i--) {
-		if (board[row][col-i] == value) {		
+		if (this->board[row][col-i] == value) {
 			return false;
 		}
 	}
 	//check column
 	for (int j = row;j > 0;j--) {
-		if (board[row-j][col] == value) {
+		if (this->board[row-j][col] == value) {
 			return false;
 		}
 	}
@@ -78,7 +84,7 @@ bool BoardCreator<N1,N2>::isValid(int& value, int& row, int& col){
 	if (row != 0) {
 		for (int l = row; l > 0;l--) {
 			for (int m = 0;m < 3;m++) {			
-				if (board[row-l][(col/3)*3 + m] == value)  {
+				if (this->board[row-l][(col/3)*3 + m] == value)  {
 					return false;
 				}
 			}
@@ -86,28 +92,7 @@ bool BoardCreator<N1,N2>::isValid(int& value, int& row, int& col){
 	}
 	return true;
 }
-/*
-template <size_t N1, size_t N2>
-void BoardCreator<N1,N2>::displayBoard() {
 
-	std::cout << "=============================" << std::endl;
-	for (int row = 0;row < N1; ++row) {
-		if ((row % 3 == 0) && (row != 0)) {
-			std::cout << "=============================" << std::endl;
-		}
-		for (int col = 0; col < N2; ++col) {
-			
-			if ((col % 3 == 0) && (col!= 0)) {
-				std::cout << "|";
-			}
-			
-			std::cout << " " << this->board[row][col] << " ";
-		}
-		std::cout << "\n";		
-	}
-	std::cout << "=============================" << std::endl;
-}
-*/
 
 template <size_t N1, size_t N2>
 int** BoardCreator<N1,N2>::getBoard() {	

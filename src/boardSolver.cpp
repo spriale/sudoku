@@ -2,7 +2,7 @@
 #include <iostream>
 
 void BoardSolver::solve() {
-	this->boardSolved[0][1] = 12;
+	boardSolved[0][1] = 12;
 	std::cout << "solved" << std::endl;
 }
 
