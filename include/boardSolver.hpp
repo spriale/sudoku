@@ -1,6 +1,8 @@
 #pragma once
 #include "board.hpp"
 #include <iostream>
+#include <optional>
+
 class BoardSolver:public Board{
 private:
 	int** boardSolved;
@@ -10,7 +12,6 @@ private:
 public:
 	
 	BoardSolver(int** board, size_t rows, size_t columns) :boardSolved{ board}, rows { rows }, columns{ columns }{};
-
 
 	void displayBoard() override {
 
@@ -32,7 +33,9 @@ public:
 		std::cout << "=============================" << std::endl;
 	}
 
-	void solve();
+	bool BoardSolver::validElementToInsert(int _posRow, int _posCol, int value);
+	std::optional< std::pair<int, int>>getZeroElement();
+	bool solve();
 
 	int** getBoard();
 	size_t getRows();
