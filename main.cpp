@@ -3,7 +3,8 @@
 #include "include/boardSolver.hpp"
 #include <iostream>
 
-int main() {
+int main()
+{
 
 	std::cout << "Create sudoku board.." << std::endl;
 	const size_t sizeBoard = 9;
@@ -12,10 +13,9 @@ int main() {
 	boardCreator.creator();
 	boardCreator.displayBoard();
 
-	BoardSolver boardSolver(boardCreator.getBoard(),sizeBoard, sizeBoard);
+	BoardSolver boardSolver(boardCreator.getBoard(), sizeBoard, sizeBoard);
 	boardSolver.solve();
 	boardSolver.displayBoard();
-	
-	return 0;
 
+	return 0;
 }

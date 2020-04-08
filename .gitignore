@@ -1,6 +1,8 @@
 #visual studio tmp
 .vs/*
 out/*
+src/out*
 
 *.swp
+CMakeSettings.json
 	

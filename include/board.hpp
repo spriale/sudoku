@@ -1,10 +1,9 @@
 #pragma once
 
-class Board {
-//protected:
+class Board
+{
+	//protected:
 	//int** board;
 public:
 	virtual void displayBoard() = 0;
 };
-
-
