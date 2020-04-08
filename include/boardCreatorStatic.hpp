@@ -8,7 +8,8 @@ private:
 	std::array<std::array<int, N1>, N2> board;
 	int boardSize;
 public:
-	Board():board{} {}; 
+	Board()
+		: board{} {};
 	void creator();
 	bool isValid(int& value, int& row, int& col);
 	void displayBoard();
