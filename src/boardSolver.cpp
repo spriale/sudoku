@@ -4,15 +4,40 @@
 
 bool BoardSolver::validElementToInsert(int _posRow, int _posCol, int value)
 {
-
+	//std::cout << "value : " << value << ";pos = " << _posRow << ", " << _posCol << std::endl;
+	//this->displayBoard();
 	// check row validity
 	for(int col = 0; col < this->columns; ++col)
 	{
 		if((this->boardSolved[_posRow][col] == value) && (_posCol != col))
 		{
-			break;
+			return false;
 		}
 	}
+	// check column validity
+	for(int row = 0; row < this->rows; ++row)
+	{
+		if((this->boardSolved[row][_posCol] == value) && (_posRow != row))
+		{
+			return false;
+		}
+	}
+
+	//check square (from previous rows)
+	for(int row = 0; row < 3; ++row)
+	{
+		for(int col = 0; col < 3; ++col)
+		{
+			int currentRow = (_posRow / 3) * 3 + row;
+			int currentCol= (_posCol / 3) * 3 + col;
+
+			if((this->boardSolved[currentRow][currentCol] == value) && (_posRow != currentRow) && (_posCol != currentCol))
+			{
+				return false;
+			}
+		}
+	}
+
 
 	return true;
 }

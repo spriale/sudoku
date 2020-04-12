@@ -3,6 +3,10 @@
 #include <array>
 #include <iostream>
 
+#include <random>
+#include <chrono>
+#include <numeric>
+
 template <size_t N1, size_t N2>
 class BoardCreator : public Board
 {
@@ -15,7 +19,18 @@ public:
 	BoardCreator()
 		: rows{N1}
 		, columns{N2}
-		, board{} {};
+		, board{} 
+	{
+		this->board = new int*[this->rows];
+		for(int row = 0; row < this->rows; row++)
+		{
+			this->board[row] = new int[this->columns];
+			for(int col = 0; col < this->columns; col++)
+			{
+				this->board[row][col] = 0;				
+			}			
+		}	
+	};
 
 	void displayBoard() override
 	{
@@ -42,47 +57,83 @@ public:
 		std::cout << "=============================" << std::endl;
 	}
 
-	void creator();
+	bool fillGrid();
+	void createBoard(const int& difficultyLevel);
+	void removeElements(const int& difficulty);
 	bool isValid(int& value, int& row, int& col);
-
+	
 	int** getBoard();
 	size_t getRows();
 	size_t getColumns();
 };
 
 template <size_t N1, size_t N2>
-void BoardCreator<N1, N2>::creator()
+bool BoardCreator<N1, N2>::fillGrid()
 {
-	this->board = new int*[N1];
-	//create 2 pointer with 1 array each
+	std::array<int, 9> possibleElements;
+	//fill possible elements from 1 to 9.
+	std::iota(possibleElements.begin(), possibleElements.end(), 1);
+	
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(seed);
+	
 	for(int row = 0; row < N1; row++)
 	{
-		this->board[row] = new int[N2];
+		
 		for(int col = 0; col < N2; col++)
 		{
-			int number = std::rand() % 10;
-			//valid boardElement before pushing into array
-			if(isValid(number, row, col))
-			{
-				this->board[row][col] = number;
-			}
-			else
-			{
-				this->board[row][col] = 0;
-			}
+			//check if value is zero
+			if(this->board[row][col] == 0)
+			{								
+				std::shuffle(possibleElements.begin(), possibleElements.end(), std::default_random_engine(seed));
+				for(auto& number : possibleElements)
+				{	
+					//valid boardElement before pushing into array		
+					if(isValid(number, row, col)) 
+					{
+						this->board[row][col] = number;
+						if(this->fillGrid())
+						{
+							return true;
+						}
+						this->board[row][col] = 0;
+					}
+				}
+				return false; 
+			}		
 		}
 	}
+	return true;
+}
+
+template <size_t N1,size_t N2>
+void BoardCreator<N1, N2>::createBoard(const int &difficultyLevel)
+{
+	if(this->fillGrid())
+	{
+		this->removeElements(difficultyLevel);
+		this->displayBoard();
+	}
+}
+
+template <size_t N1, size_t N2>
+void BoardCreator<N1, N2>::removeElements(const int& difficultyLevel)
+{
+	//remove elements according to difficultyLevel
+
 }
 
 template <size_t N1, size_t N2>
 bool BoardCreator<N1, N2>::isValid(int& value, int& row, int& col)
 {
-	//check row
 
+	//check row
+	
 	if((col == 0) && (row == 0))
 	{
 		return true;
 	}
+	
 	for(int i = col; i > 0; i--)
 	{
 		if(this->board[row][col - i] == value)
@@ -90,6 +141,7 @@ bool BoardCreator<N1, N2>::isValid(int& value, int& row, int& col)
 			return false;
 		}
 	}
+	
 	//check column
 	for(int j = row; j > 0; j--)
 	{
@@ -98,11 +150,9 @@ bool BoardCreator<N1, N2>::isValid(int& value, int& row, int& col)
 			return false;
 		}
 	}
-
+	
 	//check square (from previous rows)
-	if(row != 0)
-	{
-		for(int l = row; l > 0; l--)
+	for(int l = row%3; l > 0; l--)
 		{
 			for(int m = 0; m < 3; m++)
 			{
@@ -111,8 +161,8 @@ bool BoardCreator<N1, N2>::isValid(int& value, int& row, int& col)
 					return false;
 				}
 			}
-		}
 	}
+	
 	return true;
 }
 
