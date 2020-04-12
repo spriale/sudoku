@@ -8,14 +8,15 @@ int main()
 
 	std::cout << "Create sudoku board.." << std::endl;
 	const size_t sizeBoard = 9;
+	const int difficultyLevel = 3;
 
-	BoardCreator<sizeBoard, sizeBoard> boardCreator;
-	boardCreator.creator();
-	boardCreator.displayBoard();
+	BoardCreator<sizeBoard, sizeBoard> boardCreator;	
+	boardCreator.createBoard(difficultyLevel);
+	//boardCreator.displayBoard();
 
-	BoardSolver boardSolver(boardCreator.getBoard(), sizeBoard, sizeBoard);
+	/*BoardSolver boardSolver(boardCreator.getBoard(), sizeBoard, sizeBoard);
 	boardSolver.solve();
-	boardSolver.displayBoard();
+	boardSolver.displayBoard();*/
 
 	return 0;
 }
