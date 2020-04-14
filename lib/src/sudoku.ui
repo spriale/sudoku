@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>530</x>
       <y>30</y>
-      <width>131</width>
+      <width>141</width>
       <height>51</height>
      </rect>
     </property>
@@ -889,6 +889,19 @@
       <width>51</width>
       <height>51</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>90</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Solve Sudoku</string>
     </property>
    </widget>
   </widget>

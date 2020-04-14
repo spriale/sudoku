@@ -108,7 +108,7 @@ bool BoardCreator<N1, N2>::fillGrid()
 }
 
 template <size_t N1,size_t N2>
-void BoardCreator<N1, N2>::createBoard(const int &difficultyLevel)
+void BoardCreator<N1, N2>::createBoard(const int& difficultyLevel)
 {
 	if(this->fillGrid())
 	{
