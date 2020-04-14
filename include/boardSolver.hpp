@@ -34,7 +34,7 @@ public:
 					std::cout << "|";
 				}
 
-				std::cout << " " << boardSolved[row][col] << " ";
+				std::cout << " " << this->boardSolved[row][col] << " ";
 			}
 			std::cout << "\n";
 		}

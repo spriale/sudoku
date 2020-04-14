@@ -1,4 +1,5 @@
-#include "include/boardCreatorDynamic.hpp"
+//#include "include/boardCreatorDynamic.hpp"
+
 //#include "include/boardCreatorStatic.hpp"
 #include "include/boardSolver.hpp"
 #include <iostream>
@@ -13,16 +14,16 @@ int main(int argc, char* argv[])
 	const size_t sizeBoard = 9;
 	const int difficultyLevel = 33;
 
-	BoardCreator<sizeBoard, sizeBoard> boardCreator;	
+	/*BoardCreator<sizeBoard, sizeBoard> boardCreator;	
 	boardCreator.createBoard(difficultyLevel);
 	//boardCreator.displayBoard();
 
 	BoardSolver boardSolver(boardCreator.getBoard(), sizeBoard, sizeBoard);
 	boardSolver.solve();
-	boardSolver.displayBoard();
+	boardSolver.displayBoard();*/
 	
 	QApplication a(argc, argv);
-	sudoku w;
+	MainWindow w;
 	w.show();
 	return a.exec();
 

@@ -4,5 +4,4 @@ out/*
 src/out*
 
 *.swp
-CMakeSettings.json
 	
