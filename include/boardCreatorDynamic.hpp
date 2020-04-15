@@ -96,6 +96,7 @@ bool BoardCreator<N1, N2>::fillGrid()
 						{
 							return true;
 						}
+						//the if fillGrid() was analyzing the next element, therefore the previous element is set to zero.
 						this->board[row][col] = 0;
 					}
 				}
@@ -107,7 +108,7 @@ bool BoardCreator<N1, N2>::fillGrid()
 }
 
 template <size_t N1,size_t N2>
-void BoardCreator<N1, N2>::createBoard(const int &difficultyLevel)
+void BoardCreator<N1, N2>::createBoard(const int& difficultyLevel)
 {
 	if(this->fillGrid())
 	{
@@ -120,6 +121,17 @@ template <size_t N1, size_t N2>
 void BoardCreator<N1, N2>::removeElements(const int& difficultyLevel)
 {
 	//remove elements according to difficultyLevel
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(seed);
+	std::uniform_int_distribution<int> distribution(0, 8);
+	for(int removals = 0; removals < difficultyLevel; ++removals)
+	{
+
+		int col = distribution(generator);
+		int row = distribution(generator);
+		this->board[row][col] = 0;
+	
+	}
 
 }
 
