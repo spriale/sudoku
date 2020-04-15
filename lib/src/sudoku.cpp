@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+	this->setWindowTitle("Sudoku - SP");
 	//BOLD FONT
 	QFont font = ui->centralwidget->font();
 	font.setWeight(QFont::Bold);
@@ -41,6 +41,7 @@ void MainWindow::on_pushButton_2_clicked()
 			int row = cellPosition[0] - '0';
 			int col = cellPosition[1] - '0';
 			cell->setText((board[row][col] > 0) ? (QString::number(board[row][col])) : (""));
+			cell->setReadOnly(true);
 		}
 	}
 }
@@ -68,9 +69,7 @@ void MainWindow::on_pushButton_clicked()
 		int col = cellPosition[1] - '0';
 		cell->setText((board[row][col] > 0) ? (QString::number(board[row][col])) : (""));
 		cell->setReadOnly((board[row][col] > 0) ? (true) : (false));
-		
-		
+			
 	}
-	
 	
 }
