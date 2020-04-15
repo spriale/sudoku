@@ -1,3 +1,3 @@
 # Sudoku Solver
 
-![](sudoku.gif)
+![](sudokuSP.gif)
