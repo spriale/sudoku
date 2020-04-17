@@ -19,7 +19,7 @@
 * The sudoku board is solved using the backtracking algorithm. 
 
 ## Features
-1. Generate a new sudoku board by clinkg "Create Sudoku"
+1. Generate a new sudoku board by clicking "Create Sudoku"
 2. Solve the current available sudoku board by clicking "Solve Sudoku"
 
 ## Setup
